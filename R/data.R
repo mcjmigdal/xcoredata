@@ -76,6 +76,7 @@
 #'
 #' @format A Matrix with 209911 rows and 5728 columns. Row names corresponds to promoters
 #'         names, column names are formatted as ExperimentID.TranscriptionFactor.Biotype.
+#'
 "remap_promoters"
 
 #' ChIP-Atlas FANTOM5 promoters intersection matrix
