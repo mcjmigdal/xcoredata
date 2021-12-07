@@ -1,6 +1,7 @@
 #!/usr/bin/env R
 # ReMap2020 metada
 devtools::load_all()
+library(xcore)
 
 # Studies ids fix
 srx2srastudy <- data.table::fread(
@@ -8,7 +9,7 @@ srx2srastudy <- data.table::fread(
     "inst",
     "extdata",
     "srx2study.csv",
-    package = "xcore"
+    package = "xcoredata"
   )
 )
 
@@ -45,7 +46,7 @@ remap_meta$id <- remap_id
 # CIS-BP TF classification
 cis_bp <-
   data.table::fread(system.file("inst", "extdata", "cis_bp_tf_class.txt",
-                                package = "xcore"))
+                                package = "xcoredata"))
 cis_bp <-
   cis_bp[, .(tf_dbd = unique(DBDs)),
          by = TF_Name]

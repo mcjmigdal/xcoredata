@@ -12,6 +12,7 @@
 # 3) create intersection matrix
 # 4) Fix the meta data for the chipseq experiments
 devtools::load_all()
+library(xcore)
 
 # 1c) read in the peak into R
 chip_atlas_file <-
@@ -29,7 +30,7 @@ ambiguous_tf <- c("5-hmC", "5-mC", "8-Hydroxydeoxyguanosine", "Biotin", "BMI",
                   "Cyclobutane pyrimidine dimers", "Hepatitis B Virus X antigen")
 ambiguous_srx <-
   read.delim(
-    file = system.file("inst", "extdata", "experimentList_TF_hg38.txt", package = "xcore"),
+    file = system.file("inst", "extdata", "experimentList_TF_hg38.txt", package = "xcoredata"),
     sep = "\t",
     header = FALSE,
     quote = "\"") %>%
@@ -53,7 +54,7 @@ chip_atlas_promoters <- chip_atlas_promoters[, unique_srxIDs]
 
 # 4) Meta data for the chipseq experiments
 sxr_meta_file <-
-  system.file("inst", "extdata", "experimentList_TF_hg38.txt", package = "xcore")
+  system.file("inst", "extdata", "experimentList_TF_hg38.txt", package = "xcoredata")
 sxr_meta <- read.delim(file = sxr_meta_file,
 		      sep ="\t",
 		      header = FALSE,

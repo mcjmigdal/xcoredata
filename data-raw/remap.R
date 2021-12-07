@@ -1,6 +1,7 @@
 # Bogumil Kaczkowski
 # the purpose of the script is to overlap the FANTOM5 DPI/promoter regions with ReMap Chip Seq data-base
 devtools::load_all()
+library(xcore)
 
 # 1a) Get ReMap non redundant peaks
 # wget http://tagc.univ-mrs.fr/remap/download/remap2018/hg38/MACS/remap2018_nr_macs2_hg38_v1_2.bed.gz
@@ -11,7 +12,7 @@ devtools::load_all()
 # wget http://tagc.univ-mrs.fr/remap/download/remap2018/hg38/MACS/remap2018_all_macs2_hg38_v1_2.bed.gz
 # zcat remap2018_all_macs2_hg38_v1_2.bed.gz | awk 'OFS="\t" {print $1,$2,$3,$4,$5,$6}' > remap2018_all_macs2_hg38_v1_2.bed6.bed
 remap_input <-
-    system.file("inst", "extdata", "remap2020_all_macs2_hg38_v1_0.bed.gz", package = "xcore")
+    system.file("inst", "extdata", "remap2020_all_macs2_hg38_v1_0.bed.gz", package = "xcoredata")
 remap <- rtracklayer::import(remap_input)
 remap$name <- gsub("\\s+", "", remap$name) # remove white spaces from features names
 trans_factors <- unique(remap$name)

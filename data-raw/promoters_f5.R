@@ -1,11 +1,12 @@
 # A script to Annotate the FANTOM5 promoters/TSS regions
 # getting BED files from FANTOM5 website one for the coordinates (bed) and one with official annotation
 devtools::load_all()
+library(xcore)
 
 dpi_bed_file  <-
-  system.file("inst", "extdata", "hg38_fair+new_CAGE_peaks_phase1and2.bed.gz", package = "xcore")
+  system.file("inst", "extdata", "hg38_fair+new_CAGE_peaks_phase1and2.bed.gz", package = "xcoredata")
 dpi_annot_file <-
-  system.file("inst", "extdata", "hg38_fair+new_CAGE_peaks_phase1and2_ann.txt.gz", package = "xcore")
+  system.file("inst", "extdata", "hg38_fair+new_CAGE_peaks_phase1and2_ann.txt.gz", package = "xcoredata")
 
 dpi <- rtracklayer::import.bed(dpi_bed_file)
 dpi$itemRgb <- NULL
@@ -42,7 +43,7 @@ dpi$distance_F5_annot <- as.integer(gsub("bp_to_.*", "", dpi_annot$association_w
 dpi$distance_F5_annot[is.na(dpi$distance_F5_annot)] <- ""
 
 # GENCODE 38 annotation
-gencode_file <- system.file("inst", "extdata", "gencode.v38.annotation.gff3.gz", package = "xcore")
+gencode_file <- system.file("inst", "extdata", "gencode.v38.annotation.gff3.gz", package = "xcoredata")
 gencode <- rtracklayer::import.gff(con = gencode_file)
 dpi_gencode <- xcore::gencode_nearest_promoter_same_strand(regions = dpi,
 	        					   gencode = gencode,
@@ -131,7 +132,7 @@ promoters_f5_expression <-
     file = system.file("inst",
                        "extdata",
                        "hg38_fair+new_CAGE_peaks_phase1and2_tpm.osc.txt.gz",
-                       package = "xcore"),
+                       package = "xcoredata"),
     header = TRUE)
 promoters_f5_expression <-
   data.table::melt(data = promoters_f5_expression,
@@ -153,7 +154,7 @@ rm(promoters_f5_expression, promoters_f5_tau); gc()
 # tissue specificity protein atlass
 protein_atlas <-
   data.table::fread(
-    file = system.file("inst", "extdata", "proteinatlas.tsv.gz", package = "xcore"),
+    file = system.file("inst", "extdata", "proteinatlas.tsv.gz", package = "xcoredata"),
     header = TRUE
   )[! duplicated(Gene), ]
 data.table::setnames(protein_atlas,
@@ -175,7 +176,7 @@ rm(protein_atlas); gc()
 blacklist <- rtracklayer::import(system.file("inst",
                                              "extdata",
                                              "hg38-blacklist.v2.bed.gz",
-                                             package = "xcore")) %>%
+                                             package = "xcoredata")) %>%
   intersectGR(a = promoters_f5,
               type = "any") %>%
   GenomicRanges::mcols() %>%
@@ -188,7 +189,7 @@ rm(blacklist); gc()
 ensembl_sm <- rtracklayer::import(system.file("inst",
                                               "extdata",
                                               "hg38_ensembl_sm.bed.gz",
-                                              package = "xcore")) %>%
+                                              package = "xcoredata")) %>%
   intersectGR(a = promoters_f5,
               type = "any") %>%
   GenomicRanges::mcols() %>%
@@ -209,7 +210,7 @@ usethis::use_data(promoters_f5 ,internal = FALSE, overwrite = TRUE)
 #EP300
 dpi$ep300 <- ""
 ep300_file <-
-  system.file("inst", "extdata", "remap2020_EP300_nr_macs2_hg38_v1_0.bed.gz", package = "xcore")
+  system.file("inst", "extdata", "remap2020_EP300_nr_macs2_hg38_v1_0.bed.gz", package = "xcoredata")
 ep300 <- rtracklayer::import.bed(ep300_file)
 hits <- findOverlaps(dpi, ep300)
 dpi$ep300[hits@from] <- "EP300"
@@ -223,7 +224,7 @@ hits <- findOverlaps(dpi, enhancers_f5)
 dpi$enhancer[hits@from] <- enhancers_f5$name[hits@to]
 
 #DFAM
-dfam_file <- system.file("inst", "extdata", "hg38_dfam.3.1.nrph.hits.bed.gz", package = "xcore")
+dfam_file <- system.file("inst", "extdata", "hg38_dfam.3.1.nrph.hits.bed.gz", package = "xcoredata")
 dfam <- rtracklayer::import.bed(dfam_file)
 dpi$repeat_dfam <- ""
 hits <- findOverlaps(dpi, dfam)

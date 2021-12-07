@@ -1,6 +1,7 @@
 #!/usr/bin/env R
 # FANTOM5 core promoters
 devtools::load_all()
+library(xcore)
 
 dpi2symbol <- promoters_f5 %>%
   S4Vectors::mcols() %>%
@@ -20,7 +21,7 @@ roadmap_promoters <- rtracklayer::import.bed(
     "inst",
     "extdata",
     "Epigenome5DRoadmapDHS_promoter_hg38_liftOver.bed",
-    package = "xcore"
+    package = "xcoredata"
   )
 )
 GenomeInfoDb::seqlevels(roadmap_promoters, pruning.mode = "coarse") <-
