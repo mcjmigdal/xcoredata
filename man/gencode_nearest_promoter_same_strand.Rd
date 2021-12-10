@@ -10,6 +10,8 @@ gencode_nearest_promoter_same_strand(regions, gencode, cut_off_distance = 500)
 \item{regions}{query genomic regions as GRanges object}
 
 \item{gencode}{complete Gencode annotation as GRanges object, e.g. obrained by rtracklayer::import.gff(con = "gencode.v31.annotation.gff3.gz") ,  (gencode[ gencode$type == "transcript"] is also OK)}
+
+\item{cut_off_distance}{distance in bp used as a cut-off when annotating nearest promoters}
 }
 \value{
 GRanges with new columns added to the feature metadata: mcols(regions)

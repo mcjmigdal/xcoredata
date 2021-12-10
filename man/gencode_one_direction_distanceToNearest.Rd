@@ -10,8 +10,6 @@ gencode_one_direction_distanceToNearest(regions, gencode)
 \item{regions}{query genomic regions as GRanges object}
 
 \item{gencode}{Gencode annotation as GRanges object, usually of one type like gencode[ gencode$type == "exon"]}
-
-\item{annotation_label}{label (character) to mark what annotation was used, e.g. "gene", "exon" or "promoters"}
 }
 \value{
 GRanges with new columns added to the feature metadata: mcols(regions)
