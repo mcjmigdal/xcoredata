@@ -5,7 +5,7 @@
 \alias{chip_atlas_meta}
 \title{ChIP-Atlas metadata}
 \format{
-A \code{data.frame} with 13891 rows and 6 columns.
+A \code{data.frame} with 13891 rows and 5 columns.
 \describe{
   \item{id}{Character giving internal experiment ID.}
   \item{tf}{Character giving transcription factor name.}
