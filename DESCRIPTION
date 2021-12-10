@@ -4,8 +4,8 @@ Title: data package for xcore
 Version: 0.1.0
 Author: mcjmigdal
 Maintainer: mcjmigdal <mcjmigdal@gmail.com>
-Description: Provides data to use with xcore package
-Depends: R (>= 4.1.1)
+Description: Provides data to use with xcore package.
+Depends: R (>= 4.1)
 Imports: 
   BiocGenerics (>= 0.40.0),
   GenomeInfoDb (>= 1.30.0),
