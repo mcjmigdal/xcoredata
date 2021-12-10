@@ -13,11 +13,7 @@ srx2srastudy <- data.table::fread(
   )
 )
 
-translate <- function(x, key, value) {
-  newx <- value[match(x, key)]
-}
-
-chip_atlas_id <- colnames(chip_atlas_promoters) %>% unique()
+chip_atlas_id <- colnames(chip_atlas_promoters_f5)
 
 chip_atlas_meta <- chip_atlas_id %>%
   stringr::str_split(pattern = "\\.", n = 3) %>%
@@ -33,9 +29,6 @@ chip_atlas_meta$study <-
          chip_atlas_meta$id,
          chip_atlas_meta$study)
 
-# restore ids
-chip_atlas_meta$id <- chip_atlas_id
-
 # CIS-BP TF classification
 cis_bp <-
   data.table::fread(system.file("inst", "extdata", "cis_bp_tf_class.txt",
@@ -48,3 +41,4 @@ chip_atlas_meta <- cis_bp[chip_atlas_meta, on = c("tf" = "tf")]
 
 data.table::setcolorder(chip_atlas_meta, c("id", "tf", "tf_dbd", "biotype", "study"))
 usethis::use_data(chip_atlas_meta, overwrite = TRUE)
+
