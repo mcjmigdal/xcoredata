@@ -21,7 +21,7 @@ seqinfo_hg38 <- seqinfo_hg38[names(seqinfo_hg38)[c(1:22, 25, 23, 24)]]
 
 seqinfo(dpi) <- seqinfo_hg38
 
-dpi_annot <- data.table::fread(dpi_annot_file, header = T, sep = "\t")
+dpi_annot <- data.table::fread(dpi_annot_file, header = TRUE, sep = "\t")
 data.table::setDF(dpi_annot)
 dpi_annot <- dpi_annot[dpi_annot$`00Annotation` %in% dpi$name, ]
 dpi_annot <- dpi_annot[order(dpi_annot$`00Annotation`), ]
@@ -45,9 +45,9 @@ dpi$distance_F5_annot[is.na(dpi$distance_F5_annot)] <- ""
 # GENCODE 38 annotation
 gencode_file <- system.file("inst", "extdata", "gencode.v38.annotation.gff3.gz", package = "xcoredata")
 gencode <- rtracklayer::import.gff(con = gencode_file)
-dpi_gencode <- xcore::gencode_nearest_promoter_same_strand(regions = dpi,
-	        					   gencode = gencode,
-							   cut_off_distance = 500)
+dpi_gencode <- gencode_nearest_promoter_same_strand(regions = dpi,
+		 				    gencode = gencode,
+	 					    cut_off_distance = 500)
 dpi$SYMBOL_gencode <- dpi_gencode$nearest_symbol
 select_first <- function(x) { x[1] }
 dpi$ENTREZID_gencode <- as.character(lapply(
@@ -120,118 +120,17 @@ table(dpi$ENTREZID_F5_annot[s] == dpi$ENTREZID[s]) # the FALSE should be below 1
 # FALSE = 0.99125%
 
 promoters_f5 <- dpi
+
+# drop unneeded metadata
 promoters_f5$distance_F5_annot <- NULL
 promoters_f5$distance_gencode <- NULL
 promoters_f5$distance_ucsc <- NULL
+promoters_f5$SYMBOL_F5_annot <- NULL
+promoters_f5$ENTREZID_F5_annot <- NULL
+promoters_f5$SYMBOL_gencode <- NULL
+promoters_f5$ENTREZID_gencode <- NULL
+promoters_f5$SYMBOL_ucsc <- NULL
+promoters_f5$ENTREZID_ucsc <- NULL
 
-# tissue specificity tau
-# Matrix of promoters normalized expression across datasets in FANTOM5,
-# column names are not imported!
-promoters_f5_expression <-
-  data.table::fread(
-    file = system.file("inst",
-                       "extdata",
-                       "hg38_fair+new_CAGE_peaks_phase1and2_tpm.osc.txt.gz",
-                       package = "xcoredata"),
-    header = TRUE)
-promoters_f5_expression <-
-  data.table::melt(data = promoters_f5_expression,
-                   id.vars = "00Annotation")
-promoters_f5_tau <-
-  promoters_f5_expression[,
-                          .(t = tau(log(value + 1))),
-                          by = "00Annotation"
-  ]
-
-promoters_f5$tau <- GenomicRanges::mcols(promoters_f5) %>%
-  as.data.frame() %>%
-  dplyr::left_join(y = promoters_f5_tau[, c("00Annotation", "t")],
-                   by = c("name" = "00Annotation")) %>%
-  dplyr::pull(t)
-
-rm(promoters_f5_expression, promoters_f5_tau); gc()
-
-# tissue specificity protein atlass
-protein_atlas <-
-  data.table::fread(
-    file = system.file("inst", "extdata", "proteinatlas.tsv.gz", package = "xcoredata"),
-    header = TRUE
-  )[! duplicated(Gene), ]
-data.table::setnames(protein_atlas,
-                     c("RNA tissue specificity",
-                     "RNA single cell type specificity"),
-                     c("protein_atlas_tissue_specificity",
-                       "protein_atlas_cell_specificity"))
-
-GenomicRanges::mcols(promoters_f5) <- GenomicRanges::mcols(promoters_f5) %>%
-  as.data.frame() %>%
-  dplyr::left_join(y = protein_atlas[, c("Gene",
-                                         "protein_atlas_tissue_specificity",
-                                         "protein_atlas_cell_specificity")],
-                   by = c("SYMBOL" = "Gene"))
-
-rm(protein_atlas); gc()
-
-# ENCODE blacklisted regions
-blacklist <- rtracklayer::import(system.file("inst",
-                                             "extdata",
-                                             "hg38-blacklist.v2.bed.gz",
-                                             package = "xcoredata")) %>%
-  intersectGR(a = promoters_f5,
-              type = "any") %>%
-  GenomicRanges::mcols() %>%
-  `[[`("name")
-promoters_f5$encode_blacklist <- promoters_f5$name %in% blacklist
-
-rm(blacklist); gc()
-
-# ENSEMBL soft masked regions
-ensembl_sm <- rtracklayer::import(system.file("inst",
-                                              "extdata",
-                                              "hg38_ensembl_sm.bed.gz",
-                                              package = "xcoredata")) %>%
-  intersectGR(a = promoters_f5,
-              type = "any") %>%
-  GenomicRanges::mcols() %>%
-  `[[`("name")
-promoters_f5$ensembl_sm <- promoters_f5$name %in% ensembl_sm
-
-rm(ensembl_sm); gc()
-
-usethis::use_data(promoters_f5 ,internal = FALSE, overwrite = TRUE)
-
-# # ROADMAP
-# roadmap = rtracklayer::import.bed("~/projects/resources/roadmap/EpigenomeRoadmapDHS_hg38.bed", colnames = c("chrom", "start", "end", "name", "score"))
-# dpi$roadmap = ""
-# hits = findOverlaps(dpi , roadmap )
-# dpi$roadmap[hits@from] = roadmap$name[hits@to]
-# rm(roadmap_hg19, roadmap ); gc()
-
-#EP300
-dpi$ep300 <- ""
-ep300_file <-
-  system.file("inst", "extdata", "remap2020_EP300_nr_macs2_hg38_v1_0.bed.gz", package = "xcoredata")
-ep300 <- rtracklayer::import.bed(ep300_file)
-hits <- findOverlaps(dpi, ep300)
-dpi$ep300[hits@from] <- "EP300"
-dpi$ep300 <- as.factor(dpi$ep300)
-rm(ep300); gc()
-
-#ENHANCERS
-data("enhancers_f5", package = "xcore")
-dpi$enhancer <- ""
-hits <- findOverlaps(dpi, enhancers_f5)
-dpi$enhancer[hits@from] <- enhancers_f5$name[hits@to]
-
-#DFAM
-dfam_file <- system.file("inst", "extdata", "hg38_dfam.3.1.nrph.hits.bed.gz", package = "xcoredata")
-dfam <- rtracklayer::import.bed(dfam_file)
-dpi$repeat_dfam <- ""
-hits <- findOverlaps(dpi, dfam)
-dpi$repeat_dfam[hits@from] <- dfam$name[hits@to]
-
-# Detailed two direction annotation from Gencode
-promoters_detailed <- xcore::gencode_two_direction_annotator(regions = dpi, gencode = gencode)
-
-usethis::use_data(promoters_detailed, internal = FALSE, overwrite = TRUE)
+usethis::use_data(promoters_f5, internal = FALSE, overwrite = TRUE)
 

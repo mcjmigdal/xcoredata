@@ -40,4 +40,3 @@ promoters_f5_core <-
 
 usethis::use_data(promoters_f5_core, internal = FALSE, overwrite = TRUE)
 
-```
