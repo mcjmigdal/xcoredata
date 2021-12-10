@@ -1,6 +1,7 @@
 #' Annotate with Nearest Promoter on the Same Strand
 #' @param regions query genomic regions as GRanges object
 #' @param gencode complete Gencode annotation as GRanges object, e.g. obrained by rtracklayer::import.gff(con = "gencode.v31.annotation.gff3.gz") ,  (gencode[ gencode$type == "transcript"] is also OK)
+#' @param cut_off_distance distance in bp used as a cut-off when annotating nearest promoters
 #' @return GRanges with new columns added to the feature metadata: mcols(regions)
 #' @importFrom GenomicRanges promoters mcols
 #' @importFrom S4Vectors DataFrame
@@ -24,7 +25,6 @@ gencode_nearest_promoter_same_strand = function( regions, gencode , cut_off_dist
 #'
 #' @param regions query genomic regions as GRanges object
 #' @param gencode Gencode annotation as GRanges object, usually of one type like gencode[ gencode$type == "exon"]
-#' @param annotation_label label (character) to mark what annotation was used, e.g. "gene", "exon" or "promoters"
 #' @return GRanges with new columns added to the feature metadata: mcols(regions)
 #' @importFrom GenomicRanges distanceToNearest
 #' @export
