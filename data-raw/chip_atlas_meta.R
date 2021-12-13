@@ -29,6 +29,9 @@ chip_atlas_meta$study <-
          chip_atlas_meta$id,
          chip_atlas_meta$study)
 
+# restore id
+chip_atlas_meta$id <- paste(chip_atlas_meta$tf, chip_atlas_meta$biotype, chip_atlas_meta$id, sep = ".")
+
 # CIS-BP TF classification
 cis_bp <-
   data.table::fread(system.file("inst", "extdata", "cis_bp_tf_class.txt",
