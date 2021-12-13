@@ -40,7 +40,7 @@ remap_meta$study[grepl(pattern = "ENCSR", x = remap_meta$id)] <-
 remap_meta$study <- ifelse(is.na(remap_meta$study), remap_meta$id, remap_meta$study)
 
 # restore id
-remap_meta$id <- paste(remap_meta$tf, remap_meta$biotype, remap_meta$id, sep = ".")
+remap_meta$id <- remap_id
 
 # CIS-BP TF classification
 cis_bp <-
