@@ -1,12 +1,12 @@
 #!/usr/bin/env R
 metadata <- data.frame(
   Title = c(
-    "ChIP-Atlas molecular signatures metadata",
-    "ReMap2020 molecular signatures metadata",
-    "ChIP-Atlas molecular signatures",
-    "ReMap2020 molecular signatures",
-    "FANTOM5 promoters",
-    "core FANTOM5 promoters"
+    "chip_atlas_meta",
+    "remap_meta",
+    "chip_atlas_promoters_f5",
+    "remap_promoters_f5",
+    "promoters_f5",
+    "promoters_f5_core"
   ),
   Description = c(
     "Metadata associated with chip_atlas_promoters_f5",
@@ -49,7 +49,6 @@ metadata <- data.frame(
     "GRanges"
   ),
   DispatchClass = c("Rda", "Rda", "Rda", "Rda", "Rda", "Rda"),
-  Location_Prefix = "https://zdglab.iimcb.gov.pl/mmigdal/",
   RDataPath = paste0(
     "xcoredata/",
     c(
