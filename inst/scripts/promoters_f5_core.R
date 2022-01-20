@@ -38,5 +38,4 @@ best_promoters <- GenomicRanges::mcols(promoters_f5_core) %>%
 promoters_f5_core <-
   promoters_f5_core[promoters_f5_core$name %in% best_promoters, ]
 
-usethis::use_data(promoters_f5_core, internal = FALSE, overwrite = TRUE)
-
+save(promoters_f5_core, file = "../inst/extdata/promoters_f5_core.R")

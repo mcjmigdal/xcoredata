@@ -5,7 +5,7 @@
 #' @return GRanges with new columns added to the feature metadata: mcols(regions)
 #' @importFrom GenomicRanges promoters mcols
 #' @importFrom S4Vectors DataFrame
-#' @export
+#'
 gencode_nearest_promoter_same_strand = function( regions, gencode , cut_off_distance = 500) {
 
 	  gencode_promoters   = GenomicRanges::promoters( gencode[ gencode$type == "transcript"] , upstream = 0, downstream = 0, use.names=TRUE)
@@ -27,7 +27,7 @@ gencode_nearest_promoter_same_strand = function( regions, gencode , cut_off_dist
 #' @param gencode Gencode annotation as GRanges object, usually of one type like gencode[ gencode$type == "exon"]
 #' @return GRanges with new columns added to the feature metadata: mcols(regions)
 #' @importFrom GenomicRanges distanceToNearest
-#' @export
+#'
 gencode_one_direction_distanceToNearest = function( regions , gencode){
 
 	  # ordering so higher level gene annotation will overwrie lower level annotation

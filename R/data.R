@@ -1,8 +1,7 @@
 #' Promoters GenomicRanges object
 #'
-#' A dataset containing FANTOM5's hg38 promoters with FANTOM5's annotations.
-#' Additionally this dataset was also annotated to nearest features in GENCODE
-#' ver. 38 annotation and UCSC hg38 knownGene annotation ver. 3.13.0.
+#' FANTOM5's hg38 promoters annotated with nearest features in GENCODE ver.
+#' 38 annotation and UCSC hg38 knownGene annotation ver. 3.13.0.
 #'
 #' @format A \code{GenomicRanges} object of length 209911, with 11 metadata columns:
 #' \describe{
@@ -19,7 +18,7 @@
 
 #' Core promoters GenomicRanges object
 #'
-#' A dataset containing core promoters selected from \code{promoters_f5}.
+#' Core promoters selected from promoters_f5.
 #' Selection criteria were GENCODE confirmation and ENCODE ROADMAP confirmation.
 #' Further for each gene single promoter with highest FANTOM5 score was selected.
 #'
@@ -61,7 +60,7 @@
 
 #' ReMap2020 metadata
 #'
-#' Metadata associated with \code{remap_promoters} and \code{remap_enhancers}.
+#' Metadata associated with \code{remap_promoters}.
 #'
 #' @format A \code{data.table} with 5798 rows and 6 columns.
 #' \describe{
@@ -78,8 +77,7 @@
 
 #' ChIP-Atlas metadata
 #'
-#' Metadata associated with \code{chip_atlas_promoters} and
-#' \code{chip_atlas_enhancers}.
+#' Metadata associated with \code{chip_atlas_promoters}.
 #'
 #' @format A \code{data.frame} with 13891 rows and 5 columns.
 #' \describe{

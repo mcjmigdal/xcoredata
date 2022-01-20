@@ -1,3 +1,4 @@
+#!/usr/bin/env R
 # A script to Annotate the FANTOM5 promoters/TSS regions
 # getting BED files from FANTOM5 website one for the coordinates (bed) and one with official annotation
 devtools::load_all()
@@ -132,5 +133,4 @@ promoters_f5$ENTREZID_gencode <- NULL
 promoters_f5$SYMBOL_ucsc <- NULL
 promoters_f5$ENTREZID_ucsc <- NULL
 
-usethis::use_data(promoters_f5, internal = FALSE, overwrite = TRUE)
-
+save(promoters_f5, file = "../extdata/promoters_f5.rda")

@@ -51,4 +51,4 @@ data.table::setnames(cis_bp, "TF_Name", "tf")
 remap_meta <- cis_bp[remap_meta, on = c("tf" = "tf")]
 
 data.table::setcolorder(remap_meta, c("id", "tf", "tf_dbd", "biotype", "study", "condition"))
-usethis::use_data(remap_meta, overwrite = TRUE)
+save(remap_meta, file = "../extdata/remap_meta.rda")

@@ -53,4 +53,4 @@ chip_atlas_meta[ids][["V6"]] <- gsub("\\.", "_", chip_atlas_meta[ids][["V6"]])
 colnames(chip_atlas_promoters_f5) <- chip_atlas_meta[ids, paste(V4, V6, V1, sep = ".")]
 
 # save
-usethis::use_data(chip_atlas_promoters_f5, internal = FALSE, overwrite = TRUE)
+save(chip_atlas_promoters_f5, file = "../extdata/chip_atlas_promoters_f5.rda")

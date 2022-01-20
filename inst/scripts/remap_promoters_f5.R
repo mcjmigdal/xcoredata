@@ -1,4 +1,4 @@
-# Bogumil Kaczkowski
+#!/usr/bin/env R
 # the purpose of the script is to overlap the FANTOM5 DPI/promoter regions with ReMap Chip Seq data-base
 devtools::load_all()
 library(xcore)
@@ -43,4 +43,4 @@ colnames(remap_meta) <- c("id", "tf", "background")
 colnames(remap_promoters_f5) <- remap_meta[, paste(tf, background, id, sep = ".")]
 
 # save
-usethis::use_data(remap_promoters_f5, internal = FALSE, overwrite = TRUE)
+save(remap_promoters_f5, file = "../extdata/remap_promoters_f5.rda")
