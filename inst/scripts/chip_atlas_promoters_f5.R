@@ -2,17 +2,16 @@
 # Bogumil Kaczkowski
 # the purpose of the script is to overlap the FANTOM5 DPI/promoter regions
 # with ChipAtlas, Chip-Seq peak data-base
-devtools::load_all()
 library(xcore)
+load("promoters_f5.rda")
 
 # read in the peak into R
-chip_atlas_file <-
-  system.file("inst", "extdata", "chip_atlas_hg38.Oth.ALL.05.AllAg.AllCell_SRX_only.bed.gz", package = "xcoredata")
+chip_atlas_file <- "chip_atlas_hg38.Oth.ALL.05.AllAg.AllCell_SRX_only.bed.gz"
 chip_atlas <- rtracklayer::import(chip_atlas_file)
 chip_atlas$score <- as.integer(chip_atlas$score)
 chip_atlas_meta <-
   read.delim(
-    file = system.file("inst", "extdata", "experimentList_TF_hg38.txt", package = "xcoredata"),
+    file = "experimentList_TF_hg38.txt",
     sep = "\t",
     header = FALSE,
     quote = "\"")
@@ -53,4 +52,4 @@ chip_atlas_meta[ids][["V6"]] <- gsub("\\.", "_", chip_atlas_meta[ids][["V6"]])
 colnames(chip_atlas_promoters_f5) <- chip_atlas_meta[ids, paste(V4, V6, V1, sep = ".")]
 
 # save
-save(chip_atlas_promoters_f5, file = "../extdata/chip_atlas_promoters_f5.rda")
+save(chip_atlas_promoters_f5, file = "chip_atlas_promoters_f5.rda")

@@ -1,17 +1,10 @@
 #!/usr/bin/env R
-# ReMap2020 metada
-devtools::load_all()
+# ReMap2020 metadata
 library(xcore)
+load("remap_promoters_f5.rda")
 
 # Studies ids fix
-srx2srastudy <- data.table::fread(
-  file = system.file(
-    "inst",
-    "extdata",
-    "srx2study.csv",
-    package = "xcoredata"
-  )
-)
+srx2srastudy <- data.table::fread("../extdata/srx2study.csv")
 
 translate <- function(x, key, value) {
   value[match(x, key)]
@@ -43,12 +36,10 @@ remap_meta$study <- ifelse(is.na(remap_meta$study), remap_meta$id, remap_meta$st
 remap_meta$id <- remap_id
 
 # CIS-BP TF classification
-cis_bp <-
-  data.table::fread(system.file("inst", "extdata", "cis_bp_tf_class.txt",
-                                package = "xcoredata"))
+cis_bp <- data.table::fread("cis_bp_tf_class.txt")
 cis_bp <- cis_bp[, .(tf_dbd = unique(DBDs)), by = TF_Name]
 data.table::setnames(cis_bp, "TF_Name", "tf")
 remap_meta <- cis_bp[remap_meta, on = c("tf" = "tf")]
 
 data.table::setcolorder(remap_meta, c("id", "tf", "tf_dbd", "biotype", "study", "condition"))
-save(remap_meta, file = "../extdata/remap_meta.rda")
+save(remap_meta, file = "remap_meta.rda")

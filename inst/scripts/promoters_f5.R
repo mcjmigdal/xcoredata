@@ -1,13 +1,10 @@
 #!/usr/bin/env R
 # A script to Annotate the FANTOM5 promoters/TSS regions
 # getting BED files from FANTOM5 website one for the coordinates (bed) and one with official annotation
-devtools::load_all()
 library(xcore)
 
-dpi_bed_file  <-
-  system.file("inst", "extdata", "hg38_fair+new_CAGE_peaks_phase1and2.bed.gz", package = "xcoredata")
-dpi_annot_file <-
-  system.file("inst", "extdata", "hg38_fair+new_CAGE_peaks_phase1and2_ann.txt.gz", package = "xcoredata")
+dpi_bed_file  <- "hg38_fair+new_CAGE_peaks_phase1and2.bed.gz"
+dpi_annot_file <- "hg38_fair+new_CAGE_peaks_phase1and2_ann.txt.gz"
 
 dpi <- rtracklayer::import.bed(dpi_bed_file)
 dpi$itemRgb <- NULL
@@ -44,7 +41,7 @@ dpi$distance_F5_annot <- as.integer(gsub("bp_to_.*", "", dpi_annot$association_w
 dpi$distance_F5_annot[is.na(dpi$distance_F5_annot)] <- ""
 
 # GENCODE 38 annotation
-gencode_file <- system.file("inst", "extdata", "gencode.v38.annotation.gff3.gz", package = "xcoredata")
+gencode_file <- "gencode.v38.annotation.gff3.gz"
 gencode <- rtracklayer::import.gff(con = gencode_file)
 dpi_gencode <- gencode_nearest_promoter_same_strand(regions = dpi,
 		 				    gencode = gencode,
@@ -133,4 +130,4 @@ promoters_f5$ENTREZID_gencode <- NULL
 promoters_f5$SYMBOL_ucsc <- NULL
 promoters_f5$ENTREZID_ucsc <- NULL
 
-save(promoters_f5, file = "../extdata/promoters_f5.rda")
+save(promoters_f5, file = "promoters_f5.rda")

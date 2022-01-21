@@ -1,7 +1,7 @@
 #!/usr/bin/env R
 # FANTOM5 core promoters
-devtools::load_all()
 library(xcore)
+load("promoters_f5.rda")
 
 dpi2symbol <- promoters_f5 %>%
   S4Vectors::mcols() %>%
@@ -16,14 +16,7 @@ promoters_f5_core <-
   promoters_f5[promoters_f5$gene_type_gencode == "protein_coding", ]
 
 # ENCODE ROADMAP confirmation
-roadmap_promoters <- rtracklayer::import.bed(
-  con = system.file(
-    "inst",
-    "extdata",
-    "Epigenome5DRoadmapDHS_promoter_hg38_liftOver.bed",
-    package = "xcoredata"
-  )
-)
+roadmap_promoters <- rtracklayer::import.bed(con = "Epigenome5DRoadmapDHS_promoter_hg38_liftOver.bed")
 GenomeInfoDb::seqlevels(roadmap_promoters, pruning.mode = "coarse") <-
   GenomeInfoDb::seqlevels(promoters_f5_core)
 promoters_f5_core <- IRanges::subsetByOverlaps(x = promoters_f5_core, ranges = roadmap_promoters)
@@ -38,4 +31,4 @@ best_promoters <- GenomicRanges::mcols(promoters_f5_core) %>%
 promoters_f5_core <-
   promoters_f5_core[promoters_f5_core$name %in% best_promoters, ]
 
-save(promoters_f5_core, file = "../inst/extdata/promoters_f5_core.R")
+save(promoters_f5_core, file = "promoters_f5_core.rda")
