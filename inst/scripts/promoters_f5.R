@@ -2,6 +2,7 @@
 # A script to Annotate the FANTOM5 promoters/TSS regions
 # getting BED files from FANTOM5 website one for the coordinates (bed) and one with official annotation
 library(xcore)
+source("utils.R")
 
 dpi_bed_file  <- "hg38_fair+new_CAGE_peaks_phase1and2.bed.gz"
 dpi_annot_file <- "hg38_fair+new_CAGE_peaks_phase1and2_ann.txt.gz"
