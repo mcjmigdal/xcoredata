@@ -17,4 +17,8 @@ An intersection matrix describing overlaps between ChIP-Atlas's ChIP-seq tracks
 and \code{\link{promoters_f5}}. To find overlapping regions promoters were extended
 by 500bp in both directions.
 }
+\examples{
+chip_atlas_promoters_f5()
+
+}
 \keyword{datasets}

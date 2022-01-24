@@ -22,4 +22,8 @@ remap_meta
 \description{
 Metadata associated with \code{remap_promoters}.
 }
+\examples{
+remap_meta()
+
+}
 \keyword{datasets}

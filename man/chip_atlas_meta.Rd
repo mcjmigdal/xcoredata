@@ -21,4 +21,8 @@ chip_atlas_meta
 \description{
 Metadata associated with \code{chip_atlas_promoters}.
 }
+\examples{
+chip_atlas_meta()
+
+}
 \keyword{datasets}

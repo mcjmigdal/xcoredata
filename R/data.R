@@ -14,6 +14,9 @@
 #'                 Prevalence of annotations: UCSC > GENCODE > FANTOM5.}
 #' }
 #'
+#' @examples
+#' promoters_f5()
+#'
 "promoters_f5"
 
 #' Core promoters GenomicRanges object
@@ -33,6 +36,9 @@
 #'                 Prevalence of annotations: UCSC > GENCODE > FANTOM5.}
 #' }
 #'
+#' @examples
+#' promoters_f5_core()
+#'
 "promoters_f5_core"
 
 #' ReMap2020 and FANTOM5 promoters intersection matrix
@@ -43,6 +49,9 @@
 #'
 #' @format A Matrix with 209911 rows and 5728 columns. Row names corresponds to promoters
 #'         names, column names are formatted as ExperimentID.TranscriptionFactor.Biotype.
+#'
+#' @examples
+#' remap_promoters_f5()
 #'
 "remap_promoters_f5"
 
@@ -55,6 +64,9 @@
 #' @format A \code{Matrix} with 209911 rows and 13891 columns. Row names corresponds to promoters
 #'         names, column names are formatted as TranscriptionFactor_Origin_Cell_ExperimentID
 #'	   (eg. PARK7_Neural_SH-SY5Y_DRX000550, MLL-AF6_Blood_ML-2_DRX001460).
+#'
+#' @examples
+#' chip_atlas_promoters_f5()
 #'
 "chip_atlas_promoters_f5"
 
@@ -73,6 +85,9 @@
 #'   \item{condition}{Character specifiying experiment conditions or treatment.}
 #' }
 #'
+#' @examples
+#' remap_meta()
+#'
 "remap_meta"
 
 #' ChIP-Atlas metadata
@@ -88,6 +103,9 @@
 #'   \item{biotype}{Character giving experiment biological origin.}
 #'   \item{study}{Character giving study ID.}
 #' }
+#'
+#' @examples
+#' chip_atlas_meta()
 #'
 "chip_atlas_meta"
 

@@ -24,4 +24,8 @@ Core promoters selected from promoters_f5.
 Selection criteria were GENCODE confirmation and ENCODE ROADMAP confirmation.
 Further for each gene single promoter with highest FANTOM5 score was selected.
 }
+\examples{
+promoters_f5_core()
+
+}
 \keyword{datasets}

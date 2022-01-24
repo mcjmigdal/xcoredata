@@ -23,4 +23,8 @@ promoters_f5
 FANTOM5's hg38 promoters annotated with nearest features in GENCODE ver.
 38 annotation and UCSC hg38 knownGene annotation ver. 3.13.0.
 }
+\examples{
+promoters_f5()
+
+}
 \keyword{datasets}
