@@ -20,6 +20,6 @@ A \code{data.table} with 5798 rows and 6 columns.
 remap_meta
 }
 \description{
-Metadata associated with \code{remap_promoters} and \code{remap_enhancers}.
+Metadata associated with \code{remap_promoters}.
 }
 \keyword{datasets}

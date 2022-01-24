@@ -20,7 +20,7 @@ A \code{GenomicRanges} object of length 14191, with 16 metadata columns:
 promoters_f5_core
 }
 \description{
-A dataset containing core promoters selected from \code{promoters_f5}.
+Core promoters selected from promoters_f5.
 Selection criteria were GENCODE confirmation and ENCODE ROADMAP confirmation.
 Further for each gene single promoter with highest FANTOM5 score was selected.
 }

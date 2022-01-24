@@ -20,8 +20,7 @@ A \code{GenomicRanges} object of length 209911, with 11 metadata columns:
 promoters_f5
 }
 \description{
-A dataset containing FANTOM5's hg38 promoters with FANTOM5's annotations.
-Additionally this dataset was also annotated to nearest features in GENCODE
-ver. 38 annotation and UCSC hg38 knownGene annotation ver. 3.13.0.
+FANTOM5's hg38 promoters annotated with nearest features in GENCODE ver.
+38 annotation and UCSC hg38 knownGene annotation ver. 3.13.0.
 }
 \keyword{datasets}

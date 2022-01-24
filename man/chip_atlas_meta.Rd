@@ -19,7 +19,6 @@ A \code{data.frame} with 13891 rows and 5 columns.
 chip_atlas_meta
 }
 \description{
-Metadata associated with \code{chip_atlas_promoters} and
-\code{chip_atlas_enhancers}.
+Metadata associated with \code{chip_atlas_promoters}.
 }
 \keyword{datasets}
