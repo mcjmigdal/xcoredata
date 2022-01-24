@@ -1,0 +1,53 @@
+---
+title: "xcoredata"
+author: "Maciej Migdał"
+date: "`r Sys.Date()`"
+output: html_vignette
+vignette: >
+  %\VignetteIndexEntry{xcoredata}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE)
+```
+
+# Exploring the data in xcoredata
+
+```{r}
+library("xcoredata")
+```
+
+`xcoredata` contains the following objects, which can be accessed directly with
+named functions:
+
+```{r}
+# FANTOM5 promoters
+promoters_f5()
+promoters_f5_core()
+
+# ReMap2020 molecular signatures
+remap_promoters_f5()
+remap_meta()
+
+# ChIP-Atlas molecular signatures
+chip_atlas_promoters_f5()
+chip_atlas_meta()
+```
+
+Alternatively, these objects can be accessed using the *ExperimentHub* interface,
+eg.:
+
+```{r}
+library("ExperimentHub")
+
+eh <- ExperimentHub()
+query(eh, "remap_meta")
+eh[["EH7299"]]
+```
+
+For details on these resources see object's documentation eg. `?remap_meta`.
+The construction scripts are located under `inst/scripts`, especially look
+into `inst/scripts/make-data.Rmd`.
+
