@@ -20,7 +20,5 @@ Suggest:
   TxDb.Hsapiens.UCSC.hg38.knownGene (>= 3.14.0)
 License: GPL-2
 Encoding: UTF-8
-LazyData: true
-LazyDataCompression: bzip2
 RoxygenNote: 7.1.2
 biocViews: ExperimentHub, Homo_sapiens_Data
