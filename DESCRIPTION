@@ -19,7 +19,7 @@ Depends: R (>= 4.2)
 Imports:
   ExperimentHub (>= 2.2.0),
   utils (>= 4.2.0)
-Suggest:
+Suggests:
   BiocGenerics (>= 0.40.0),
   data.table (>= 1.14.2),
   GenomeInfoDb (>= 1.30.0),
