@@ -51,3 +51,7 @@ For details on these resources see object's documentation eg. `?remap_meta`.
 The construction scripts are located under `inst/scripts`, especially look
 into `inst/scripts/make-data.Rmd`.
 
+```{r}
+sessionInfo()
+```
+
