@@ -42,7 +42,7 @@ jobs:
         run: |
           install.packages(c("devtools", "BiocManager"))
           BiocManager::install(version='devel')
-          BiocManager::install("BiocCheck")
+          BiocManager::install(c("BiocCheck", "ExperimentHub"))
           remotes::install_deps(dependencies = TRUE)
         shell: Rscript {0}
 
