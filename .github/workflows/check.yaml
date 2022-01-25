@@ -49,7 +49,3 @@ jobs:
       - name: Check package
         run: devtools::check(error_on = "never")
         shell: Rscript {0}
-
-      - name: BiocCheck package
-        run: BiocCheck::BiocCheck()
-        shell: Rscript {0}
