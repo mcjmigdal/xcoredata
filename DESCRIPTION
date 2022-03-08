@@ -18,7 +18,7 @@ Description: Provides data to use with xcore package.
 Depends: R (>= 4.1)
 Imports:
   ExperimentHub (>= 2.2.0),
-  utils (>= 4.2.0)
+  utils (>= 4.1)
 Suggests:
   BiocGenerics (>= 0.40.0),
   data.table (>= 1.14.2),
