@@ -15,14 +15,14 @@ knitr::opts_chunk$set(collapse = TRUE)
 
 # Exploring the data in xcoredata
 
-```{r}
+```{r eval=FALSE}
 library("xcoredata")
 ```
 
 `xcoredata` contains the following objects, which can be accessed directly with
 named functions:
 
-```{r}
+```{r eval=FALSE}
 # FANTOM5 promoters
 promoters_f5()
 promoters_f5_core()
@@ -39,7 +39,7 @@ chip_atlas_meta()
 Alternatively, these objects can be accessed using the *ExperimentHub* interface,
 eg.:
 
-```{r}
+```{r eval=FALSE}
 library("ExperimentHub")
 
 eh <- ExperimentHub()
