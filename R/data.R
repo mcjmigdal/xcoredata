@@ -109,3 +109,24 @@
 #'
 "chip_atlas_meta"
 
+#' ENTREZ IDs to FANTOM5 core promoters names mappings
+#'
+#' Vector mapping ENTREZ IDs to FANTOM5 core promoters names.
+#'
+#' @format A named \code{character} vector of length 14214.
+#'
+#' @examples
+#' entrez2fantom()
+#'
+"entrez2fantom"
+
+#' Gene symbols to FANTOM5 core promoters names mappings
+#'
+#' Vector mapping gene symbols to FANTOM5 core promoters names.
+#'
+#' @format A named \code{character} vector of length 14222.
+#'
+#' @examples
+#' symbol2fantom()
+#'
+"symbol2fantom"
